@@ -1,3 +1,5 @@
+@use "sass:color";
+
 $hive-red: #E31337;
 $hive-black: #212529;
 $hive-lightgrey: #F0F0F8;
@@ -125,7 +127,7 @@ header {
 
       &:hover {
         background-color: rgba(255,255,255,0.3);
-        a {color: lighten($hive-grey,30);}
+        a {color: color.adjust($hive-grey, $lightness: 30%);}
       }
 
       a, a:focus, a:visited, a:active {

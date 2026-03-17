@@ -2,7 +2,7 @@ import React from 'react';
 import HiveEngineAPI from './HiveEngineAPI.js';
 import './HiveEngineToolsV2.scss';
 import store from 'store/dist/store.modern';
-import Since from './better-since.js';
+import Since from './better-since.jsx';
 import MUIDataTable from "mui-datatables";
 
 const HiveEngine = new HiveEngineAPI();

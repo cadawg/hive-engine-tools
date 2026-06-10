@@ -3,7 +3,6 @@
 * © cadawg <cadawg@protonmail.com> https://github.com/Snaddyvitch-Dispenser https://peakd.com/@cadawg 2020
 * */
 
-import axios from 'axios';
 
 class HiveEngineAPI {
     constructor(API_URL ="") {
@@ -22,14 +21,19 @@ class HiveEngineAPI {
     }
 
     async queryContract(contract,table,query={},offset=0) {
-        let response = await axios.post(
+        let response = await fetch(
             this.getContractUrl(),
-            JSON.stringify([{"method": "find", "jsonrpc": "2.0", "params": {"contract":  contract, "table":  table, "query": query, "limit": 1000, "offset": offset, "indexes" : []},  "id" : 1}]),
-            {headers: {"Content-Type": "application/json", "Cache-Control": "no-cache"}}
+            {
+                method: 'POST',
+                body: JSON.stringify([{"method": "find", "jsonrpc": "2.0", "params": {"contract":  contract, "table":  table, "query": query, "limit": 1000, "offset": offset, "indexes" : []},  "id" : 1}]),
+                headers: {"Content-Type": "application/json", "Cache-Control": "no-cache"}
+            }
         );
 
-        if (response.data !== undefined && response.data !== null && response.data[0].result !== null && response.data[0].result !== undefined) {
-            return response.data[0].result;
+        let data = await response.json();
+
+        if (data !== undefined && data !== null && data[0].result !== null && data[0].result !== undefined) {
+            return data[0].result;
         } else {
             return false;
         }
